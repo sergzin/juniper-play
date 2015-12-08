@@ -1,0 +1,20 @@
+---
+- name: setup debian repositories
+  apt_repository: repo={{item}} state=present
+  with_items: debian_repositories
+  notify:
+    - update apt_cache
+
+- name: install common tools
+  apt: pkg={{item}} state=present
+  with_items:
+    - htop
+    - vim-nox
+    - iotop
+    - curl
+    - git
+
+- name: "Build hosts file"
+  lineinfile: dest=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item].ansible_host }} {{item}}" state=present
+  when: hostvars[item].ansible_host is defined
+  with_items: groups['all']

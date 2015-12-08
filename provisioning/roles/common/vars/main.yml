@@ -1,0 +1,5 @@
+---
+debian_repositories:
+  - '''deb http://ftp.nl.debian.org/debian jessie main contrib non-free'''
+  - '''deb http://ftp.nl.debian.org/debian jessie-backports main contrib non-free'''
+  - '''deb http://security.debian.org jessie/updates main contrib non-free'''

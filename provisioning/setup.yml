@@ -1,0 +1,5 @@
+---
+- name: Provision common tools
+  hosts: all
+  roles:
+      - common
