@@ -1,0 +1,13 @@
+---
+- name: install python tools
+  apt: pkg={{item}} state=present
+  with_items:
+   - python-dev
+   - python-pip
+   - python-lxml
+   - ipython
+   - ipython-notebook
+   - virtualenvwrapper
+
+- name: install Juniper-eznc client
+  pip: name=junos-eznc

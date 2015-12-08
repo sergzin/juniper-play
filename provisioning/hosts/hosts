@@ -1,7 +1,7 @@
 [vagrant]
 localhost
 
-[juniper]
+[junos]
 R1 ansible_host=192.168.0.1
 R2 ansible_host=192.168.0.2
 R3 ansible_host=192.168.0.3

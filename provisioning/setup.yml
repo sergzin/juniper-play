@@ -1,5 +1,16 @@
 ---
 - name: Provision common tools
-  hosts: all
+  hosts: vagrant
   roles:
       - common
+
+- name: Provision Junos automation tools
+  hosts: vagrant
+  roles:
+    - python-junos
+
+- name: Provision Junos devices
+  hosts: junos
+  roles:
+    - Juniper.junos
+    - junos-devices
