@@ -11,3 +11,12 @@
 
 - name: install Juniper-eznc client
   pip: name=junos-eznc
+
+- name: check if Juniper.junos role installed
+  shell: ansible-galaxy list | grep Juniper.junos || echo False
+  changed_when: "'False' in junos_role_status.stdout"
+  register: junos_role_status
+
+- name: Install Juniper.junos role if missing
+  shell: ansible-galaxy install Juniper.junos
+  when: "'Juniper.junos' not in junos_role_status.stdout"

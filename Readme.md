@@ -11,12 +11,13 @@
 - clone repository in your work folder
   - `git clone https://github.com/sergzin/juniper-play.git`
  
-## start VMs
+## start/stop VMs
 - execute from work folder `vagrant up`
 - after provisioning finished execute `vagrant ssh linux`
   - on windows use ssh client of your choice to connect to linux VM
   - use ssh key or the following credentials 
     login:`vagrant` password:`vagrant` 
+- to stop VMs execute `vagrant halt` in working folder
 
 ## connect to junos VMs
 - connect to R1,R2,R3 from VM `ssh root@R1` use password `Juniper`
