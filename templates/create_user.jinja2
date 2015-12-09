@@ -1,0 +1,10 @@
+system {
+    login {
+        user {{ juniper_username }} {
+            class super-user;
+            authentication {
+                encrypted-password "{{ juniper_password_hash }}";
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+---
+- name: execute show version
+  roles:
+    - Juniper.junos
+  hosts: all
+  connection: local
+  gather_facts: no
+#  vars_prompt:
+#    - name: USERNAME
+#      prompt: User name
+#      private: no
+#    - name: DEVICE_PASSWORD
+#      prompt: Device password
+#      private: yes
+  vars:
+    juniper_password_hash: $1$svM6GywF$FERFGFUthSlKY/ZLmWbEj0
+    juniper_username: lab
+
+  pre_tasks:
+    - name: generate config
+      template: src=templates/create_user.jinja2 dest=/tmp/create_user.conf
+
+  tasks:
+    - name: Checking NETCONF connectivity
+      wait_for: host={{ inventory_hostname }} port=830 timeout=5
+
+    - name: create new user
+      junos_install_config:
+        host={{ inventory_hostname }}
+        user=root
+        passwd=Juniper
+        file=/tmp/create_user.conf
+        overwrite=false
+        logfile=/var/log/ansible/junos/config.log

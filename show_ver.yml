@@ -1,0 +1,28 @@
+---
+- name: execute show version
+  roles:
+    - Juniper.junos
+  hosts: all
+  connection: local
+  gather_facts: no
+#  vars_prompt:
+#    - name: USERNAME
+#      prompt: User name
+#      private: no
+#    - name: DEVICE_PASSWORD
+#      prompt: Device password
+#      private: yes
+  vars:
+    juniper_password_hash: $1$svM6GywF$FERFGFUthSlKY/ZLmWbEj0
+    juniper_username: lab
+  tasks:
+    - name: Checking NETCONF connectivity
+      wait_for: host={{ inventory_hostname }} port=830 timeout=5
+
+    - name: get facts from junos
+      #junos_get_facts: host={{ inventory_hostname }} user={{ USERNAME }} passwd={{ DEVICE_PASSWORD }}
+      junos_get_facts: host={{ inventory_hostname }} user=root passwd=Juniper
+      register: junos
+
+    - name: version
+      debug: msg="{{ junos.facts.version }}"
