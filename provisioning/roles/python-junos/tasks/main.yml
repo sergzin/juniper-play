@@ -5,6 +5,7 @@
    - python-dev
    - python-pip
    - python-lxml
+   - python-ipdb
    - ipython
    - ipython-notebook
    - virtualenvwrapper
