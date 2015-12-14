@@ -1,0 +1,5 @@
+---
+junos:
+  users:
+    - {"user":"lab", "phash":"$1$svM6GywF$FERFGFUthSlKY/ZLmWbEj0"}
+    - {"user":"lab2", "phash":"$1$svM6GywF$FERFGFUthSlKY/ZLmWbEj0"}

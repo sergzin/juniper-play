@@ -1,0 +1,12 @@
+system {
+    login {
+    {%  for item in junos.users %}
+        user {{ item.user }} {
+            class super-user;
+            authentication {
+                encrypted-password "{{ item.phash }}";
+            }
+        }
+    {% endfor %}
+    }
+}

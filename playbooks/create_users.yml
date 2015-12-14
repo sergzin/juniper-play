@@ -1,0 +1,27 @@
+---
+- name: execute show version
+  roles:
+    - Juniper.junos
+  hosts: all
+  connection: local
+  gather_facts: no
+
+  pre_tasks:
+#    - name: debug
+#      debug: var=junos
+
+    - name: generate config
+      template: src=templates/create_users.jinja2 dest=/tmp/{{ inventory_hostname }}-create_users.conf
+
+  tasks:
+    - name: Checking NETCONF connectivity
+      wait_for: host={{ inventory_hostname }} port=830 timeout=5
+
+    - name: create new user
+      junos_install_config:
+        host={{ inventory_hostname }}
+        user=root
+        passwd=Juniper
+        file=/tmp/{{ inventory_hostname }}-create_users.conf
+        overwrite=false
+        logfile=/var/log/ansible/junos/config-{{ inventory_hostname }}.log
