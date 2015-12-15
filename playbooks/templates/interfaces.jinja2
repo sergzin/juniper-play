@@ -1,0 +1,11 @@
+interfaces {
+{% for item in junos.isis_interfaces %}
+    {{ item.name.split('.')[0] }} {
+        unit {{ item.name.split('.')[1] }} {
+            family iso;
+        }
+    }
+
+{% endfor %}
+
+}

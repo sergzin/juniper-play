@@ -1,0 +1,20 @@
+interfaces {
+    lo0 {
+        unit 0 {
+    {% if junos.loopback.ip is defined %}
+            replace:
+            family inet {
+            {% for item in junos.loopback.ip %}
+                address {{ item }};
+            {% endfor %}
+            }
+    {% endif %}
+    {% if junos.loopback.iso is defined %}
+            replace:
+            family iso {
+                address {{ junos.loopback.iso }};
+            }
+    {% endif %}
+        }
+    }
+}

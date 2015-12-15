@@ -1,0 +1,10 @@
+---
+junos:
+  loopback:
+    ip:
+      - 10.0.0.2
+    iso: 49.0001.0000.0000.0002.00
+  isis_interfaces:
+    - { "name": "lo0.0" }
+    - { "name": "ge-0/0/2.0", "metric": "100" }
+    - { "name": "ge-0/0/3.0", "metric": "100" }

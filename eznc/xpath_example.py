@@ -20,7 +20,7 @@ def print_interface_mac(hostname):
     all_up = interface_output.xpath(".//physical-interface[starts-with(name,'ge') and oper-status='up']")
 
     for item in all_up:
-        print hostname, item.find('name').text, item.find('current-physical-address').text
+        print hostname, item.find('name').text, item.find('current-physical-address').text, item.find('.//ifa-local').text
         # pprint(recursive_dict(item))
 
     dev.close()

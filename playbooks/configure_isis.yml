@@ -1,0 +1,42 @@
+---
+- name: configure ISIS
+  roles:
+    - Juniper.junos
+  hosts: all
+  connection: local
+  gather_facts: no
+
+  pre_tasks:
+    - set_fact:
+        work_dir: "/tmp/isis/{{ inventory_hostname }}"
+        assembled_config: "/tmp/isis/{{ inventory_hostname }}.conf"
+
+    - name: create {{ work_dir }}
+      file: path={{work_dir}} state=directory
+
+    - name: generate config for interfaces
+      template: src=templates/interfaces.jinja2 dest={{work_dir}}/{{ inventory_hostname }}-interfaces.conf
+
+    - name: generate config for protocols/isis
+      template: src=templates/isis.jinja2 dest={{work_dir}}/{{ inventory_hostname }}-protocols.conf
+
+    - name: assemble complete file
+      assemble: src={{work_dir}} dest={{assembled_config}}
+
+  tasks:
+    - name: Checking NETCONF connectivity
+      wait_for: host={{ inventory_hostname }} port=830 timeout=5
+
+    - name: load Junos configuration
+      junos_install_config:
+        host={{ inventory_hostname }}
+        user=lab
+        passwd=lab123
+        file={{assembled_config}}
+        overwrite=false
+        logfile=/var/log/ansible/junos/config-{{ inventory_hostname }}.log
+
+  post_tasks:
+    - name: delete temporary files
+      file: path={{work_dir}} state=absent
+

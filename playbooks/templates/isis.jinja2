@@ -1,0 +1,15 @@
+protocols {
+    isis {
+        level 1 disable;
+{% for item in junos.isis_interfaces %}
+    {% if item.metric is defined %}
+    interface {{ item.name }} {
+        point-to-point;
+        level 2 metric {{ item.metric }};
+    }
+    {% else %}
+    interface {{ item.name }};
+    {% endif %}
+{% endfor %}
+    }
+}
