@@ -15,7 +15,7 @@ def print_interface_mac(hostname):
     dev.open()
     interface_output = dev.rpc.get_interface_information()
 
-    # print tostring(interface_output, method='xml', pretty_print=True)
+    print tostring(interface_output, method='xml', pretty_print=True)
 
     all_up = interface_output.xpath(".//physical-interface[starts-with(name,'ge') and oper-status='up']")
 
@@ -37,4 +37,6 @@ def print_interface_table(hostname):
 
 for host in ['R1', 'R2', 'R3']:
     print_interface_mac(host)
+    raw_input("Press enter to continue...")
     print_interface_table(host)
+    raw_input("Press enter to continue...")
