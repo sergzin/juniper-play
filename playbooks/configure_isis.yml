@@ -2,7 +2,7 @@
 - name: configure ISIS
   roles:
     - Juniper.junos
-  hosts: all
+  hosts: junos
   connection: local
   gather_facts: no
 
@@ -23,6 +23,11 @@
     - name: assemble complete file
       assemble: src={{work_dir}} dest={{assembled_config}}
 
+    - name: collect isis neighbours before
+      command: ./scripts/junos_rpc_to_json.py --host {{ inventory_hostname }} --username lab --password lab123 --rpc "<get-isis-interface-information/>"
+      register: isis_before
+
+
   tasks:
     - name: Checking NETCONF connectivity
       wait_for: host={{ inventory_hostname }} port=830 timeout=5
@@ -34,9 +39,29 @@
         passwd=lab123
         file={{assembled_config}}
         overwrite=false
+        replace=true
         logfile=/var/log/ansible/junos/config-{{ inventory_hostname }}.log
 
   post_tasks:
     - name: delete temporary files
       file: path={{work_dir}} state=absent
+
+    - name: collect isis neighbours after
+      command: ./scripts/junos_rpc_to_json.py --host {{ inventory_hostname }} --username lab --password lab123 --rpc "<get-isis-interface-information/>"
+      register: isis_after
+
+    - set_fact:
+        before: "{{ isis_before.stdout|from_json }}"
+        after: "{{ isis_after.stdout|from_json }}"
+#    - debug: var=before
+#    - debug: var=after
+
+    - name: isis interfaces are NOT equal before and after
+      debug: msg=changed
+      when: before != after
+
+#    - name: isis interfaces are equal before and after
+#      debug: msg=equial
+#      when: before == after
+
 

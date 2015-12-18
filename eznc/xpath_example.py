@@ -5,8 +5,11 @@ from pprint import pprint
 from credentials import username, password
 
 
-def recursive_dict(element):
-    return element.tag, dict(map(recursive_dict, element)) or element.text
+def etree_to_dict(element):
+    d = {element.tag : map(etree_to_dict, element.iterchildren())}
+    d.update(('@' + k, v) for k, v in element.attrib.iteritems())
+    d['text'] = element.text
+    return d
 
 
 def print_interface_mac(hostname):

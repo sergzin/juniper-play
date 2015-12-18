@@ -2,7 +2,7 @@
 - name: execute show version
   roles:
     - Juniper.junos
-  hosts: all
+  hosts: junos
   connection: local
   gather_facts: no
 #  vars_prompt:

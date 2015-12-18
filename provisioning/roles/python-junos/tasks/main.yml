@@ -6,6 +6,7 @@
    - python-pip
    - python-lxml
    - python-ipdb
+   - python-xmltodict
    - ipython
    - ipython-notebook
    - virtualenvwrapper

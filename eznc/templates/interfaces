@@ -1,15 +1,15 @@
 interfaces {
-{% for name, iface_data in interfaces.items() %}
+    {% for name, iface_data in interfaces.items() %}
     {{ name }} {
-{% for unit, addresses in iface_data.items() %}
+        {% for unit, addresses in iface_data.items() %}
         unit {{ unit }} {
             family inet {
-    {% for address in addresses %}
+                {% for address in addresses %}
                 address {{ address }};
-    {% endfor %}
+                {% endfor %}
             }
         }
-{% endfor %}
+        {% endfor %}
     }
-{% endfor %}
+    {% endfor %}
 }
