@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
         nic_type: 'virtio',
         virtualbox__intnet: "r1-r3"
     router.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.customize ["modifyvm", :id, "--memory", "512"]
       vb.customize ["modifyvm", :id, "--cpus", "2"]
       vb.check_guest_additions = false
     end
@@ -72,7 +72,7 @@ Vagrant.configure(2) do |config|
         nic_type: 'virtio',
         virtualbox__intnet: "r2-r3"
     router.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.customize ["modifyvm", :id, "--memory", "512"]
       vb.customize ["modifyvm", :id, "--cpus", "2"]
       vb.check_guest_additions = false
     end
@@ -98,7 +98,7 @@ Vagrant.configure(2) do |config|
         nic_type: 'virtio',
         virtualbox__intnet: "r1-r3"
     router.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.customize ["modifyvm", :id, "--memory", "512"]
       vb.customize ["modifyvm", :id, "--cpus", "2"]
       vb.check_guest_additions = false
     end

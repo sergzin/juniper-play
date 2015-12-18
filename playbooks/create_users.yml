@@ -2,7 +2,7 @@
 - name: execute show version
   roles:
     - Juniper.junos
-  hosts: all
+  hosts: junos
   connection: local
   gather_facts: no
 
@@ -24,4 +24,5 @@
         passwd=Juniper
         file=/tmp/{{ inventory_hostname }}-create_users.conf
         overwrite=false
+        replace=true
         logfile=/var/log/ansible/junos/config-{{ inventory_hostname }}.log

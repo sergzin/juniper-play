@@ -20,3 +20,9 @@
   lineinfile: dest=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item].ansible_host }} {{item}}" state=present
   when: hostvars[item].ansible_host is defined
   with_items: groups['all']
+  
+- name: Copy ansible inventory file to default location
+  copy: src=hosts/hosts dest=/etc/ansible/hosts mode=0644
+
+- name: create ansible logs folder
+  file: path=/var/log/ansible/junos state=directory mode=0777 owner=vagrant

@@ -1,2 +1,2 @@
-username = 'lab'
-password = 'lab123'
+username = 'root'
+password = 'Juniper'

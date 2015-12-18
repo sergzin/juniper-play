@@ -1,6 +1,7 @@
 system {
+	replace:
     login {
-    {%  for item in junos.users %}
+    {%  for item in junos_users %}	
         user {{ item.user }} {
             class super-user;
             authentication {

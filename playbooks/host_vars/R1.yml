@@ -1,8 +1,8 @@
 ---
+junos_users:
+  - {"user":"lab", "phash":"$1$svM6GywF$FERFGFUthSlKY/ZLmWbEj0"}
+  - {"user":"lab1", "phash":"$1$svM6GywF$FERFGFUthSlKY/ZLmWbEj0"}
 junos:
-  users:
-    - {"user":"lab", "phash":"$1$svM6GywF$FERFGFUthSlKY/ZLmWbEj0"}
-    - {"user":"labR1", "phash":"$1$svM6GywF$FERFGFUthSlKY/ZLmWbEj0"}
   loopback:
     ip:
       - 10.0.0.1
