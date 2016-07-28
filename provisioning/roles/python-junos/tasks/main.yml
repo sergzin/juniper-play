@@ -15,9 +15,14 @@
    - ipython-notebook
    - virtualenvwrapper
 
+- name: upgrade python setuptools from backports
+  apt: name=python-setuptools state=latest default_release=jessie-backports
+
+- name: install python cryptography module
+  pip: name=cryptography version=1.2.1
 
 - name: install Juniper-eznc client
-  pip: name=junos-eznc virtualenv=/home/vagrant/venv
+  pip: name=junos-eznc version=1.3.1
 
 - name: check if Juniper.junos role installed
   shell: ansible-galaxy list | grep Juniper.junos || echo False
