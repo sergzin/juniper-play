@@ -34,7 +34,7 @@
         replace=true
         logfile=/var/log/ansible/junos/config-{{ inventory_hostname }}.log
 
-  post_tasks:
-    - name: delete temporary files
-      file: path={{work_dir}} state=absent
+  # post_tasks:
+    # - name: delete temporary files
+      # file: path={{work_dir}} state=absent
 

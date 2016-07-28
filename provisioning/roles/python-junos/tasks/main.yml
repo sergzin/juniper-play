@@ -4,6 +4,10 @@
   with_items:
    - python-dev
    - python-pip
+   - libxml2-dev
+   - libxslt-dev
+   - libssl-dev
+   - libffi-dev
    - python-lxml
    - python-ipdb
    - python-xmltodict
@@ -11,8 +15,9 @@
    - ipython-notebook
    - virtualenvwrapper
 
+
 - name: install Juniper-eznc client
-  pip: name=junos-eznc
+  pip: name=junos-eznc virtualenv=/home/vagrant/venv
 
 - name: check if Juniper.junos role installed
   shell: ansible-galaxy list | grep Juniper.junos || echo False

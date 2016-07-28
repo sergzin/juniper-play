@@ -43,8 +43,8 @@
         logfile=/var/log/ansible/junos/config-{{ inventory_hostname }}.log
 
   post_tasks:
-    - name: delete temporary files
-      file: path={{work_dir}} state=absent
+    # - name: delete temporary files
+      # file: path={{work_dir}} state=absent
 
     - name: collect isis neighbours after
       command: ./scripts/junos_rpc_to_json.py --host {{ inventory_hostname }} --username lab --password lab123 --rpc "<get-isis-interface-information/>"
@@ -60,8 +60,8 @@
       debug: msg=changed
       when: before != after
 
-#    - name: isis interfaces are equal before and after
-#      debug: msg=equial
-#      when: before == after
+    - name: isis interfaces are equal before and after
+      debug: msg=equial
+      when: before == after
 
 

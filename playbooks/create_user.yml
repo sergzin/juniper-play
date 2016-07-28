@@ -18,7 +18,7 @@
 
   pre_tasks:
     - name: generate config
-      template: src=templates/create_user.jinja2 dest=/tmp/create_user.conf
+      template: src=templates/create_user.jinja2 dest=/tmp/{{ inventory_hostname }}-create_user.conf
 
   tasks:
     - name: Checking NETCONF connectivity
@@ -29,6 +29,6 @@
         host={{ inventory_hostname }}
         user=root
         passwd=Juniper
-        file=/tmp/create_user.conf
+        file=/tmp/{{inventory_hostname}}-create_user.conf
         overwrite=false
         logfile=/var/log/ansible/junos/config.log

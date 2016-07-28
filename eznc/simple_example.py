@@ -2,7 +2,7 @@ from jnpr.junos import Device
 from credentials import username, password
 from pprint import pprint
 
-dev = Device(user=username, host='R1', password=password)
+dev = Device(user=username, host='R2', password=password)
 
 dev.open()
 
