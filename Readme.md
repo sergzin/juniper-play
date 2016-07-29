@@ -10,9 +10,9 @@ One Debian Linux and three VMs with Juniper Junos (vSRX).
 - install vagrant plugins
     - `vagrant plugin install vagrant-host-shell`
     - `vagrant plugin install vagrant-junos`
-- install [git] (http://git-scm.com/download)
-- clone repository in your work folder
-    - `git clone https://github.com/sergzin/juniper-play.git`
+- install [git] (http://git-scm.com/download) or [download](https://github.com/sergzin/juniper-play/archive/master.zip) source code
+    - clone repository in your work folder
+        - `git clone https://github.com/sergzin/juniper-play.git`
  
 ## start/stop VMs
 - execute from work folder `vagrant up`
